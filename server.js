@@ -1,11 +1,13 @@
 require('./crons/newCron');
+require("dotenv").config()
+
 const express = require('express');
 const mongoose = require('mongoose');
 const dbConfig = require('./configs/db.config');
 const routes = require('./routes/notificationRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 
 mongoose.connect(dbConfig.DB_URL+dbConfig.DB_NAME, {family: 4}, (error) => {
