@@ -9,6 +9,7 @@ cron.schedule('*/5 * * * * *', async () => {
             status: 'UN_SENT'
         }).exec();
         let testAccount = await nodemailer.createTestAccount();
+        console.log(notifications.length);
         notifications.forEach(async notification => {
             transporter(testAccount).sendMail({
                 from: testAccount.user,
@@ -22,7 +23,7 @@ cron.schedule('*/5 * * * * *', async () => {
                 else {
                     console.log(data);
                     const updateNotification = await NotificationModel.findOne({ _id: notification._id }).exec()
-                    updateNotification.status = 'UN_SENT';
+                    updateNotification.status = 'SENT';
                     updateNotification.save();
                 }
             });
